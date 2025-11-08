@@ -16,6 +16,9 @@ const updateTimer = () => {
     ${seconds.toString().padStart(2,"0")}`;
 };
 
+const alarm = new Audio('audio/alarm.mp3');
+alarm.volume = 0.2;
+
 const startTimer = () => {
       if (interval) {
             clearInterval(interval); 
@@ -27,7 +30,7 @@ const startTimer = () => {
 
             if (timeLeft === 0) {
                   clearInterval(interval);
-                  alert("Time's up!");
+                  alarm.play();
                   timeLeft = 1500; 
                   updateTimer();
             }

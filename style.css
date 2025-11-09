@@ -1,20 +1,122 @@
- *{
+/* --- Reset Global e Fontes --- */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial;
- }
- body{
+    /* Fonte limpa, parecida com a da imagem */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* --- Corpo da Página (Background dividido) --- */
+body {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
- }
- .container{
+    
+    /* Cria o fundo dividido:
+      - 0% a 65%: Branco
+      - 65% a 100%: Azul claro
+    */
+    background: linear-gradient(
+        to bottom,
+        white 0%,
+        white 65%,
+        #cce0ff 65%,
+        #cce0ff 100%
+    );
+}
+
+/* --- Container Principal (A "Janela") --- */
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2em;
+    gap: 1.5em; /* Espaçamento entre os itens */
     
- }
+    background: #ffffff;
+    border-radius: 10px;
+    /* Sombra suave para destacar a janela */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    
+    /* Posição relativa para a barra de título */
+    position: relative;
+    
+    /* Espaçamento interno, com mais espaço no topo para a barra */
+    padding: 4.5em 3em 2.5em 3em;
+    width: 450px; /* Largura fixa para o container */
+}
+
+/* --- Barra de Título ("home") --- */
+.container::before {
+    content: 'home'; /* Texto da barra */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    
+    background-color: #333; /* Cinza escuro */
+    color: white;
+    font-size: 0.8rem;
+    text-align: left;
+    
+    /* Espaçamento e bordas arredondadas (só no topo) */
+    padding: 8px 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+/* --- Título (H1) --- */
+h1.timer {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #000; /* "pomodoro" em preto */
+}
+
+/* --- Parte do Título (Span "timer") --- */
+h1.timer span {
+    font-weight: 400; /* Mais leve */
+    color: #5b9dff; /* Azul claro */
+}
+
+/* --- Linha Horizontal (Não queremos ela) --- */
+hr {
+    display: none;
+}
+
+/* --- Display do Timer (25:00) --- */
+p#timer {
+    font-size: 6.5rem;
+    font-weight: 700;
+    color: #000;
+    margin: 0.2em 0; /* Espaçamento vertical */
+}
+
+/* --- Wrapper dos Botões --- */
+.button-wrapper {
+    display: flex;
+    gap: 1em; /* Espaço entre os botões */
+    margin-top: 1em;
+}
+
+/* --- Estilo dos Botões (Start, Stop, Reset) --- */
+button {
+    background-color: white;
+    border: 3px solid black;
+    border-radius: 5px;
+    
+    padding: 0.7em 1.8em;
+    font-size: 1rem;
+    font-weight: 600;
+    color: black;
+    
+    cursor: pointer;
+    transition: all 0.1s ease;
+}
+
+/* Efeito de "pressionar" ao clicar */
+button:active {
+    transform: translateY(2px);
+    background-color: #f0f0f0;
+}

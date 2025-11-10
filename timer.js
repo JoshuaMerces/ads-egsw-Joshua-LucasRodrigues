@@ -3,8 +3,11 @@ const stop = document.getElementById("stop");
 const reset = document.getElementById("reset");
 const timer = document.getElementById("timer");
 
-let timeLeft = 1500;
+const WORK_TIME = 1500; 
+const BREAK_TIME = 300; 
+let timeLeft = WORK_TIME; 
 let interval;
+let workTimer = true;
 
 const updateTimer = () => {
     const minutes = Math.floor(timeLeft/60);
@@ -30,9 +33,19 @@ const startTimer = () => {
 
             if (timeLeft === 0) {
                   clearInterval(interval);
-                  alarm.play();
-                  timeLeft = 1500; 
-                  updateTimer();
+
+                  if (workTimer) {
+                        alarm.play();
+                        workTimer = false;
+                        timeLeft = BREAK_TIME; 
+                        updateTimer();
+                        startTimer();
+                  } else {
+                        alarm.play();
+                        workTimer = true;
+                        timeLeft = WORK_TIME; 
+                        updateTimer();
+                  }
             }
       }, 1000);
 };
@@ -41,8 +54,9 @@ const stopTimer = () => clearInterval(interval);
 
 const resetTimer = () => {
     clearInterval(interval);
-        timeLeft = 1500;
-        updateTimer();
+    workTimer = true; 
+    timeLeft = WORK_TIME; 
+    updateTimer();
 };
 
 start.addEventListener("click", startTimer);
